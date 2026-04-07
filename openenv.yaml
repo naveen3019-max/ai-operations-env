@@ -1,0 +1,79 @@
+name: AI Operations Assistant Environment
+version: 1.0.0
+author: AI Research Team
+description: |
+  Production-grade OpenEnv-compliant environment for training and evaluating
+  AI agents on enterprise business workflows including email handling,
+  customer support ticket management, and meeting scheduling.
+
+environment:
+  class: AIOperationsEnvironment
+  module: env.environment
+  observation_type: Observation
+  action_type: Action
+  reward_type: Reward
+
+tasks:
+  - name: Email Classification
+    difficulty: easy
+    description: Correctly classify emails into categories
+    class: EasyEmailClassificationTask
+    module: tasks.easy
+    max_steps: 50
+    initial_items:
+      emails: 7
+      tickets: 0
+      meetings: 0
+
+  - name: Support Handling
+    difficulty: medium
+    description: Classify emails, reply to support, and resolve tickets
+    class: MediumSupportHandlingTask
+    module: tasks.medium
+    max_steps: 75
+    initial_items:
+      emails: 6
+      tickets: 2
+      meetings: 0
+
+  - name: Full Operations Management
+    difficulty: hard
+    description: Manage emails, tickets, and meetings with prioritization
+    class: HardFullOperationsTask
+    module: tasks.hard
+    max_steps: 120
+    initial_items:
+      emails: 9
+      tickets: 3
+      meetings: 2
+
+graders:
+  easy:
+    class: EasyGrader
+    module: graders.grader_easy
+  medium:
+    class: MediumGrader
+    module: graders.grader_medium
+  hard:
+    class: HardGrader
+    module: graders.grader_hard
+
+baseline:
+  agent_class: BaselineAgent
+  agent_module: baseline.agent
+  runner_module: baseline.run
+  description: Rule-based agent using keyword matching and heuristics
+
+features:
+  - Email classification with 5 categories
+  - Support ticket management with severity levels
+  - Meeting scheduling with urgency levels
+  - Dense reward function with multiple components
+  - Priority-based decision making
+  - Task dependencies and constraints
+  - Deterministic grading system
+  - Reproducible baseline agent
+
+compatibility:
+  openenv_version: ">=1.0.0"
+  python_version: ">=3.10"

@@ -1,0 +1,3 @@
+[console_scripts]
+ai-ops-baseline = baseline.run:cli_main
+openenv-validate = validate_openenv:main
