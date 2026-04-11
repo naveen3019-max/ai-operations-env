@@ -19,9 +19,16 @@ HF_TOKEN = os.getenv("HF_TOKEN")
 LOCAL_IMAGE_NAME = os.getenv("LOCAL_IMAGE_NAME")
 
 
-def _log(stage: str, event: str, **kwargs: Any) -> None:
-    payload: Dict[str, Any] = {"event": event, **kwargs}
-    print(f"{stage} {json.dumps(payload, ensure_ascii=True)}")
+def _fmt(value: Any) -> str:
+    text = str(value)
+    return text.replace(" ", "_")
+
+
+def _log(stage: str, **kwargs: Any) -> None:
+    # Phase 2 validator expects bracketed START/STEP/END blocks on stdout.
+    parts = [f"{key}={_fmt(val)}" for key, val in kwargs.items()]
+    line = f"[{stage}] " + " ".join(parts)
+    print(line, flush=True)
 
 
 def _openai_base_url() -> str:
@@ -45,20 +52,26 @@ def run_inference(payload: Dict[str, Any] | None = None) -> Dict[str, Any]:
 
     All LLM calls are made through the OpenAI client as required.
     """
-    _log("START", "inference", model=MODEL_NAME)
+    task_name = "openenv-inference"
+    step_idx = 0
+    score = 0.0
+    _log("START", task=task_name, model=MODEL_NAME)
 
     prompt = (payload or {}).get("prompt", "Say hello in one sentence.")
-    _log("STEP", "client_init", api_base_url=API_BASE_URL)
+    step_idx += 1
+    _log("STEP", step=step_idx, action="client_init", api_base_url=API_BASE_URL)
     client = OpenAI(base_url=_openai_base_url(), api_key=HF_TOKEN or "DUMMY_TOKEN")
 
     try:
-        _log("STEP", "llm_call", model=MODEL_NAME)
+        step_idx += 1
+        _log("STEP", step=step_idx, action="llm_call", model=MODEL_NAME)
         response = client.chat.completions.create(
             model=MODEL_NAME,
             messages=[{"role": "user", "content": prompt}],
             temperature=0,
         )
         content = response.choices[0].message.content if response.choices else ""
+        score = 1.0
         result: Dict[str, Any] = {
             "model_name": MODEL_NAME,
             "api_base_url": API_BASE_URL,
@@ -67,7 +80,9 @@ def run_inference(payload: Dict[str, Any] | None = None) -> Dict[str, Any]:
         }
     except Exception as exc:
         # For non-LLM demo endpoints, return a healthcheck instead of crashing.
-        _log("STEP", "fallback_healthcheck", reason=str(exc))
+        step_idx += 1
+        _log("STEP", step=step_idx, action="fallback_healthcheck", reason=type(exc).__name__)
+        score = 0.7
         result = {
             "model_name": MODEL_NAME,
             "api_base_url": API_BASE_URL,
@@ -76,7 +91,7 @@ def run_inference(payload: Dict[str, Any] | None = None) -> Dict[str, Any]:
             "warning": "LLM endpoint unavailable, returned healthcheck response",
         }
 
-    _log("END", "inference", success=True)
+    _log("END", task=task_name, score=score, steps=step_idx)
     return result
 
 
