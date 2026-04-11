@@ -37,14 +37,20 @@ def _openai_base_url() -> str:
 
 
 def _fallback_healthcheck() -> Dict[str, Any]:
-    req = request.Request(API_BASE_URL.rstrip("/") + "/", method="GET")
-    with request.urlopen(req, timeout=30) as resp:
-        body = resp.read().decode("utf-8")
-
     try:
-        return json.loads(body)
-    except json.JSONDecodeError:
-        return {"raw": body}
+        req = request.Request(API_BASE_URL.rstrip("/") + "/", method="GET")
+        with request.urlopen(req, timeout=8) as resp:
+            body = resp.read().decode("utf-8")
+
+        try:
+            return json.loads(body)
+        except json.JSONDecodeError:
+            return {"raw": body}
+    except Exception as exc:
+        return {
+            "error": "fallback_unavailable",
+            "reason": type(exc).__name__,
+        }
 
 
 def run_inference(payload: Dict[str, Any] | None = None) -> Dict[str, Any]:
@@ -60,8 +66,9 @@ def run_inference(payload: Dict[str, Any] | None = None) -> Dict[str, Any]:
     prompt = (payload or {}).get("prompt", "Say hello in one sentence.")
     step_idx += 1
     _log("STEP", step=step_idx, action="client_init", api_base_url=API_BASE_URL)
-    client = OpenAI(base_url=_openai_base_url(), api_key=HF_TOKEN or "DUMMY_TOKEN")
+    client = OpenAI(base_url=_openai_base_url(), api_key=HF_TOKEN or "DUMMY_TOKEN", timeout=8.0)
 
+    result: Dict[str, Any]
     try:
         step_idx += 1
         _log("STEP", step=step_idx, action="llm_call", model=MODEL_NAME)
@@ -96,5 +103,12 @@ def run_inference(payload: Dict[str, Any] | None = None) -> Dict[str, Any]:
 
 
 if __name__ == "__main__":
-    output = run_inference()
-    print(json.dumps(output, indent=2, ensure_ascii=True))
+    try:
+        output = run_inference()
+    except Exception as exc:
+        _log("START", task="openenv-inference", model=MODEL_NAME)
+        _log("STEP", step=1, action="fatal_error", reason=type(exc).__name__)
+        _log("END", task="openenv-inference", score=0.0, steps=1)
+        output = {"error": "fatal_inference_error", "reason": type(exc).__name__}
+
+    print(json.dumps(output, indent=2, ensure_ascii=True), flush=True)
