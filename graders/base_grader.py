@@ -10,9 +10,16 @@ from env.models import TaskResult
 class BaseGrader(ABC):
     """Abstract base class for task graders."""
 
+    EPSILON = 1e-6
+
     def __init__(self, task_name: str):
         """Initialize grader."""
         self.task_name = task_name
+
+    @classmethod
+    def strict_score(cls, score: float) -> float:
+        """Clamp score to the strict open interval (0, 1)."""
+        return max(cls.EPSILON, min(1.0 - cls.EPSILON, float(score)))
 
     @abstractmethod
     def grade(self, env: AIOperationsEnvironment, total_reward: float) -> TaskResult:

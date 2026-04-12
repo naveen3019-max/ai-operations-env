@@ -226,7 +226,7 @@ class HardFullOperationsTask(BaseTask):
         return TaskResult(
             task_name=self.name,
             total_reward=summary["total_reward"],
-            final_score=max(0.0, min(1.0, total_score)),
+            final_score=self.strict_score(total_score),
             steps_taken=summary["steps"],
             action_counts=summary["action_counts"],
             success=total_score > 0.6,

@@ -85,7 +85,7 @@ class MediumGrader(BaseGrader):
         return TaskResult(
             task_name=self.task_name,
             total_reward=total_reward,
-            final_score=max(0.0, min(1.0, final_score)),
+            final_score=self.strict_score(final_score),
             steps_taken=summary["steps"],
             action_counts=summary["action_counts"],
             success=final_score > 0.65,

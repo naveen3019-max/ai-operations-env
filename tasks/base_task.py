@@ -13,6 +13,8 @@ from env.models import Observation, Reward, TaskResult
 class BaseTask(ABC):
     """Abstract base class for tasks."""
 
+    EPSILON = 1e-6
+
     def __init__(
         self,
         name: str,
@@ -63,6 +65,11 @@ class BaseTask(ABC):
         module = import_module(self.grader_module)
         grader_cls = getattr(module, self.grader_class)
         return grader_cls()
+
+    @classmethod
+    def strict_score(cls, score: float) -> float:
+        """Clamp score to the strict open interval (0, 1)."""
+        return max(cls.EPSILON, min(1.0 - cls.EPSILON, float(score)))
 
     def setup_environment(self) -> AIOperationsEnvironment:
         """
