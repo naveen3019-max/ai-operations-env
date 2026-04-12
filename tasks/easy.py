@@ -104,5 +104,5 @@ class EasyEmailClassificationTask(BaseTask):
             steps_taken=summary["steps"],
             action_counts=summary["action_counts"],
             success=score > 0.7,
-            details=details,
+            details=self.sanitize_metrics(details),
         )

@@ -51,9 +51,11 @@ class EasyGrader(BaseGrader):
             steps_taken=summary["steps"],
             action_counts=summary["action_counts"],
             success=score > 0.7,
-            details={
-                "accuracy": accuracy,
-                "classified": total,
-                "total_possible": len(state.emails),
-            },
+            details=self.sanitize_metrics(
+                {
+                    "accuracy": accuracy,
+                    "classified": total,
+                    "total_possible": len(state.emails),
+                }
+            ),
         )

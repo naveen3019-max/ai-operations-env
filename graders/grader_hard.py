@@ -135,15 +135,17 @@ class HardGrader(BaseGrader):
             steps_taken=summary["steps"],
             action_counts=summary["action_counts"],
             success=final_score > 0.60,
-            details={
-                "classification_accuracy": correct_classifications / total_classified if total_classified else 0.0,
-                "reply_rate": replied_count / len(support_emails) if support_emails else 1.0,
-                "critical_handling_rate": critical_handled / len(critical_tickets) if critical_tickets else 1.0,
-                "low_closure_rate": low_closed / len(low_tickets) if low_tickets else 1.0,
-                "meeting_scheduling_rate": scheduled_meetings / len(state.meetings) if state.meetings else 1.0,
-                "efficiency_score": efficiency_bonus,
-                "total_emails": len(state.emails),
-                "total_tickets": len(state.tickets),
-                "total_meetings": len(state.meetings),
-            },
+            details=self.sanitize_metrics(
+                {
+                    "classification_accuracy": correct_classifications / total_classified if total_classified else 0.0,
+                    "reply_rate": replied_count / len(support_emails) if support_emails else 1.0,
+                    "critical_handling_rate": critical_handled / len(critical_tickets) if critical_tickets else 1.0,
+                    "low_closure_rate": low_closed / len(low_tickets) if low_tickets else 1.0,
+                    "meeting_scheduling_rate": scheduled_meetings / len(state.meetings) if state.meetings else 1.0,
+                    "efficiency_score": efficiency_bonus,
+                    "total_emails": len(state.emails),
+                    "total_tickets": len(state.tickets),
+                    "total_meetings": len(state.meetings),
+                }
+            ),
         )

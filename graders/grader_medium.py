@@ -89,13 +89,15 @@ class MediumGrader(BaseGrader):
             steps_taken=summary["steps"],
             action_counts=summary["action_counts"],
             success=final_score > 0.65,
-            details={
-                "classification_accuracy": classification_score,
-                "reply_rate": reply_score,
-                "resolution_rate": resolution_score,
-                "emails_classified": total_classified,
-                "emails_correct": correct_classifications,
-                "support_emails_replied": replied_count,
-                "tickets_closed": closed_tickets,
-            },
+            details=self.sanitize_metrics(
+                {
+                    "classification_accuracy": classification_score,
+                    "reply_rate": reply_score,
+                    "resolution_rate": resolution_score,
+                    "emails_classified": total_classified,
+                    "emails_correct": correct_classifications,
+                    "support_emails_replied": replied_count,
+                    "tickets_closed": closed_tickets,
+                }
+            ),
         )
