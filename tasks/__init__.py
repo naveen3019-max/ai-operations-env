@@ -17,21 +17,24 @@ TASKS = [
 TASK_REGISTRY = {
     "easy": {
         "task_class": EasyEmailClassificationTask,
-        "grader": "easy",
+        "grader": "graders.grader_easy.EasyGrader",
+        "grader_key": "easy",
         "grader_path": "graders.grader_easy.EasyGrader",
         "grader_import_path": "graders.easy.EasyGrader",
         "grader_enabled": True,
     },
     "medium": {
         "task_class": MediumSupportHandlingTask,
-        "grader": "medium",
+        "grader": "graders.grader_medium.MediumGrader",
+        "grader_key": "medium",
         "grader_path": "graders.grader_medium.MediumGrader",
         "grader_import_path": "graders.medium.MediumGrader",
         "grader_enabled": True,
     },
     "hard": {
         "task_class": HardFullOperationsTask,
-        "grader": "hard",
+        "grader": "graders.grader_hard.HardGrader",
+        "grader_key": "hard",
         "grader_path": "graders.grader_hard.HardGrader",
         "grader_import_path": "graders.hard.HardGrader",
         "grader_enabled": True,
@@ -41,19 +44,22 @@ TASK_REGISTRY = {
 TASKS_WITH_GRADERS = [
     {
         "task": EasyEmailClassificationTask,
-        "grader": "easy",
+        "grader": "graders.grader_easy.EasyGrader",
+        "grader_key": "easy",
         "grader_path": "graders.grader_easy.EasyGrader",
         "grader_import_path": "graders.easy.EasyGrader",
     },
     {
         "task": MediumSupportHandlingTask,
-        "grader": "medium",
+        "grader": "graders.grader_medium.MediumGrader",
+        "grader_key": "medium",
         "grader_path": "graders.grader_medium.MediumGrader",
         "grader_import_path": "graders.medium.MediumGrader",
     },
     {
         "task": HardFullOperationsTask,
-        "grader": "hard",
+        "grader": "graders.grader_hard.HardGrader",
+        "grader_key": "hard",
         "grader_path": "graders.grader_hard.HardGrader",
         "grader_import_path": "graders.hard.HardGrader",
     },
@@ -65,7 +71,8 @@ tasks = [
     {
         "name": "Email Classification",
         "task": EasyEmailClassificationTask,
-        "grader": "easy",
+        "grader": "graders.grader_easy.EasyGrader",
+        "grader_key": "easy",
         "grader_path": "graders.grader_easy.EasyGrader",
         "grader_import_path": "graders.easy.EasyGrader",
         "grader_enabled": True,
@@ -73,7 +80,8 @@ tasks = [
     {
         "name": "Support Handling",
         "task": MediumSupportHandlingTask,
-        "grader": "medium",
+        "grader": "graders.grader_medium.MediumGrader",
+        "grader_key": "medium",
         "grader_path": "graders.grader_medium.MediumGrader",
         "grader_import_path": "graders.medium.MediumGrader",
         "grader_enabled": True,
@@ -81,7 +89,8 @@ tasks = [
     {
         "name": "Full Operations Management",
         "task": HardFullOperationsTask,
-        "grader": "hard",
+        "grader": "graders.grader_hard.HardGrader",
+        "grader_key": "hard",
         "grader_path": "graders.grader_hard.HardGrader",
         "grader_import_path": "graders.hard.HardGrader",
         "grader_enabled": True,

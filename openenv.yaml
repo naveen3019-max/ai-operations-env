@@ -20,7 +20,7 @@ tasks:
     description: Correctly classify emails into categories
     class: EasyEmailClassificationTask
     module: tasks.easy
-    grader: easy
+    grader: graders.grader_easy.EasyGrader
     grader_key: easy
     grader_id: easy
     grader_path: graders.grader_easy.EasyGrader
@@ -41,7 +41,7 @@ tasks:
     description: Classify emails, reply to support, and resolve tickets
     class: MediumSupportHandlingTask
     module: tasks.medium
-    grader: medium
+    grader: graders.grader_medium.MediumGrader
     grader_key: medium
     grader_id: medium
     grader_path: graders.grader_medium.MediumGrader
@@ -62,7 +62,7 @@ tasks:
     description: Manage emails, tickets, and meetings with prioritization
     class: HardFullOperationsTask
     module: tasks.hard
-    grader: hard
+    grader: graders.grader_hard.HardGrader
     grader_key: hard
     grader_id: hard
     grader_path: graders.grader_hard.HardGrader
@@ -80,26 +80,42 @@ tasks:
 tasks_with_graders: 3
 tasks_with_graders_min: 3
 tasks_with_graders_count: 3
+tasks_with_graders_list:
+  - name: Email Classification
+    grader: graders.grader_easy.EasyGrader
+    grader_key: easy
+    enabled: true
+  - name: Support Handling
+    grader: graders.grader_medium.MediumGrader
+    grader_key: medium
+    enabled: true
+  - name: Full Operations Management
+    grader: graders.grader_hard.HardGrader
+    grader_key: hard
+    enabled: true
 
 task_configs:
 - name: Email Classification
   task_class: EasyEmailClassificationTask
   task_module: tasks.easy
-  grader: easy
+  grader: graders.grader_easy.EasyGrader
+  grader_key: easy
   grader_path: graders.grader_easy.EasyGrader
   grader_import_path: graders.easy.EasyGrader
   grader_enabled: true
 - name: Support Handling
   task_class: MediumSupportHandlingTask
   task_module: tasks.medium
-  grader: medium
+  grader: graders.grader_medium.MediumGrader
+  grader_key: medium
   grader_path: graders.grader_medium.MediumGrader
   grader_import_path: graders.medium.MediumGrader
   grader_enabled: true
 - name: Full Operations Management
   task_class: HardFullOperationsTask
   task_module: tasks.hard
-  grader: hard
+  grader: graders.grader_hard.HardGrader
+  grader_key: hard
   grader_path: graders.grader_hard.HardGrader
   grader_import_path: graders.hard.HardGrader
   grader_enabled: true
