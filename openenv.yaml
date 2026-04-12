@@ -20,6 +20,7 @@ tasks:
     class: EasyEmailClassificationTask
     module: tasks.easy
     grader: graders.grader_easy.EasyGrader
+    grader_name: easy
     grader_module: graders.grader_easy
     grader_class: EasyGrader
     grader_enabled: true
@@ -35,6 +36,7 @@ tasks:
     class: MediumSupportHandlingTask
     module: tasks.medium
     grader: graders.grader_medium.MediumGrader
+    grader_name: medium
     grader_module: graders.grader_medium
     grader_class: MediumGrader
     grader_enabled: true
@@ -50,6 +52,7 @@ tasks:
     class: HardFullOperationsTask
     module: tasks.hard
     grader: graders.grader_hard.HardGrader
+    grader_name: hard
     grader_module: graders.grader_hard
     grader_class: HardGrader
     grader_enabled: true
@@ -69,6 +72,33 @@ graders:
   hard:
     class: HardGrader
     module: graders.grader_hard
+  EasyGrader:
+    class: EasyGrader
+    module: graders.grader_easy
+  MediumGrader:
+    class: MediumGrader
+    module: graders.grader_medium
+  HardGrader:
+    class: HardGrader
+    module: graders.grader_hard
+  graders.grader_easy.EasyGrader:
+    class: EasyGrader
+    module: graders.grader_easy
+  graders.grader_medium.MediumGrader:
+    class: MediumGrader
+    module: graders.grader_medium
+  graders.grader_hard.HardGrader:
+    class: HardGrader
+    module: graders.grader_hard
+  graders.easy.EasyGrader:
+    class: EasyGrader
+    module: graders.easy
+  graders.medium.MediumGrader:
+    class: MediumGrader
+    module: graders.medium
+  graders.hard.HardGrader:
+    class: HardGrader
+    module: graders.hard
 
 baseline:
   agent_class: BaselineAgent
