@@ -33,6 +33,7 @@ class MediumSupportHandlingTask(BaseTask):
             description="Classify emails, reply to support requests, and resolve tickets efficiently",
             difficulty="medium",
             max_steps=max_steps,
+            grader_name="medium",
             grader_module="graders.grader_medium",
             grader_class="MediumGrader",
         )

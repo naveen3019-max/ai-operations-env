@@ -41,6 +41,7 @@ class HardFullOperationsTask(BaseTask):
             description="Manage emails, tickets, and meetings with prioritization and efficiency",
             difficulty="hard",
             max_steps=max_steps,
+            grader_name="hard",
             grader_module="graders.grader_hard",
             grader_class="HardGrader",
         )

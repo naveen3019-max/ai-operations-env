@@ -19,6 +19,7 @@ class BaseTask(ABC):
         description: str,
         difficulty: str,
         max_steps: int = 100,
+        grader_name: str = "",
         grader_module: str = "",
         grader_class: str = "",
     ):
@@ -35,13 +36,15 @@ class BaseTask(ABC):
         self.description = description
         self.difficulty = difficulty
         self.max_steps = max_steps
+        self.grader_name = grader_name
         self.grader_module = grader_module
         self.grader_class = grader_class
-        self.grader = (
-            f"{grader_module}.{grader_class}"
-            if grader_module and grader_class
-            else ""
-        )
+        if grader_name:
+            self.grader = grader_name
+        elif grader_module and grader_class:
+            self.grader = f"{grader_module}.{grader_class}"
+        else:
+            self.grader = ""
         self.env: AIOperationsEnvironment = None
         self.episode_data: Dict[str, Any] = {}
 
