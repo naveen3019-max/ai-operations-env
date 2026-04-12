@@ -2,10 +2,10 @@
   "easy": {
     "task_name": "Email Classification",
     "difficulty": "easy",
-    "average_score": 0.7619047619047619,
-    "average_reward": 0.75,
-    "success_rate": 0.6666666666666666,
-    "score_std": 0.24281045302822785,
+    "average_score": 0.42857142857142855,
+    "average_reward": -0.6499999999999999,
+    "success_rate": 0.0,
+    "score_std": 0.0,
     "episodes": [
       {
         "episode": 0,
@@ -26,35 +26,35 @@
       },
       {
         "episode": 1,
-        "total_reward": 1.15,
+        "total_reward": -0.6499999999999999,
         "steps": 7,
-        "final_score": 0.8571428571428571,
-        "success": true,
+        "final_score": 0.42857142857142855,
+        "success": false,
         "action_counts": {
           "classify_email": 7
         },
         "details": {
           "classified": 7,
-          "correct": 6,
+          "correct": 3,
           "total": 7,
-          "accuracy": 0.8571428571428571,
+          "accuracy": 0.42857142857142855,
           "coverage": 1.0
         }
       },
       {
         "episode": 2,
-        "total_reward": 1.75,
+        "total_reward": -0.6499999999999999,
         "steps": 7,
-        "final_score": 1.0,
-        "success": true,
+        "final_score": 0.42857142857142855,
+        "success": false,
         "action_counts": {
           "classify_email": 7
         },
         "details": {
           "classified": 7,
-          "correct": 7,
+          "correct": 3,
           "total": 7,
-          "accuracy": 1.0,
+          "accuracy": 0.42857142857142855,
           "coverage": 1.0
         }
       }
@@ -63,10 +63,10 @@
   "medium": {
     "task_name": "Support Handling",
     "difficulty": "medium",
-    "average_score": 0.41111111111111115,
-    "average_reward": 0.8966666666666666,
+    "average_score": 0.20000000000000004,
+    "average_reward": -0.29999999999999993,
     "success_rate": 0.0,
-    "score_std": 0.17708197167232473,
+    "score_std": 2.7755575615628914e-17,
     "episodes": [
       {
         "episode": 0,
@@ -90,41 +90,39 @@
       },
       {
         "episode": 1,
-        "total_reward": 1.3399999999999999,
-        "steps": 8,
-        "final_score": 0.6333333333333333,
+        "total_reward": -0.29999999999999993,
+        "steps": 6,
+        "final_score": 0.2,
         "success": false,
         "action_counts": {
-          "classify_email": 6,
-          "close_ticket": 2
+          "classify_email": 6
         },
         "details": {
-          "classification_accuracy": 0.8333333333333334,
+          "classification_accuracy": 0.5,
           "support_reply_coverage": 0.0,
-          "ticket_resolution_rate": 1.0,
+          "ticket_resolution_rate": 0.0,
           "emails_classified": 6,
-          "correct_classifications": 5,
+          "correct_classifications": 3,
           "support_emails_replied": 0,
-          "tickets_closed": 2,
+          "tickets_closed": 0,
           "total_tickets": 2
         }
       },
       {
         "episode": 2,
-        "total_reward": 1.65,
-        "steps": 7,
-        "final_score": 0.4,
+        "total_reward": -0.29999999999999993,
+        "steps": 6,
+        "final_score": 0.2,
         "success": false,
         "action_counts": {
-          "classify_email": 6,
-          "escalate_ticket": 1
+          "classify_email": 6
         },
         "details": {
-          "classification_accuracy": 1.0,
+          "classification_accuracy": 0.5,
           "support_reply_coverage": 0.0,
           "ticket_resolution_rate": 0.0,
           "emails_classified": 6,
-          "correct_classifications": 6,
+          "correct_classifications": 3,
           "support_emails_replied": 0,
           "tickets_closed": 0,
           "total_tickets": 2
@@ -135,10 +133,10 @@
   "hard": {
     "task_name": "Full Operations Management",
     "difficulty": "hard",
-    "average_score": 0.5787978395061728,
-    "average_reward": 1.36,
-    "success_rate": 0.3333333333333333,
-    "score_std": 0.05413566826601888,
+    "average_score": 0.5833388888888889,
+    "average_reward": 0.6900000000000001,
+    "success_rate": 0.0,
+    "score_std": 0.0,
     "episodes": [
       {
         "episode": 0,
@@ -169,55 +167,56 @@
       },
       {
         "episode": 1,
-        "total_reward": 2.14,
-        "steps": 14,
-        "final_score": 0.642712962962963,
-        "success": true,
+        "total_reward": 0.6900000000000002,
+        "steps": 13,
+        "final_score": 0.5833388888888889,
+        "success": false,
         "action_counts": {
           "classify_email": 9,
           "escalate_ticket": 1,
-          "close_ticket": 2,
+          "close_ticket": 1,
           "schedule_meeting": 2
         },
         "details": {
-          "classification_accuracy": 0.7777777777777778,
+          "classification_accuracy": 0.5555555555555556,
           "emails_classified": 9,
-          "correct_classifications": 7,
+          "correct_classifications": 5,
           "support_replies": 0,
-          "total_support_emails": 2,
+          "total_support_emails": 1,
           "critical_tickets_handled": 1,
           "total_critical": 1,
           "low_tickets_closed": 1,
           "total_low": 1,
           "meetings_scheduled": 2,
           "total_meetings": 2,
-          "prioritization_score": 0.04826851851851851
+          "prioritization_score": 0.044449999999999996
         }
       },
       {
         "episode": 2,
-        "total_reward": 1.25,
+        "total_reward": 0.6900000000000002,
         "steps": 13,
-        "final_score": 0.5103416666666667,
+        "final_score": 0.5833388888888889,
         "success": false,
         "action_counts": {
           "classify_email": 9,
-          "escalate_ticket": 2,
+          "escalate_ticket": 1,
+          "close_ticket": 1,
           "schedule_meeting": 2
         },
         "details": {
-          "classification_accuracy": 0.6666666666666666,
+          "classification_accuracy": 0.5555555555555556,
           "emails_classified": 9,
-          "correct_classifications": 6,
+          "correct_classifications": 5,
           "support_replies": 0,
-          "total_support_emails": 2,
-          "critical_tickets_handled": 2,
-          "total_critical": 2,
-          "low_tickets_closed": 0,
-          "total_low": 0,
+          "total_support_emails": 1,
+          "critical_tickets_handled": 1,
+          "total_critical": 1,
+          "low_tickets_closed": 1,
+          "total_low": 1,
           "meetings_scheduled": 2,
           "total_meetings": 2,
-          "prioritization_score": 0.043675
+          "prioritization_score": 0.044449999999999996
         }
       }
     ]
