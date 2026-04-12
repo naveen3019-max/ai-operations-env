@@ -19,7 +19,7 @@ tasks:
     description: Correctly classify emails into categories
     class: EasyEmailClassificationTask
     module: tasks.easy
-    grader: easy
+    grader: graders.grader_easy
     grader_path: graders.grader_easy.EasyGrader
     grader_name: easy
     grader_module: graders.grader_easy
@@ -36,7 +36,7 @@ tasks:
     description: Classify emails, reply to support, and resolve tickets
     class: MediumSupportHandlingTask
     module: tasks.medium
-    grader: medium
+    grader: graders.grader_medium
     grader_path: graders.grader_medium.MediumGrader
     grader_name: medium
     grader_module: graders.grader_medium
@@ -53,7 +53,7 @@ tasks:
     description: Manage emails, tickets, and meetings with prioritization
     class: HardFullOperationsTask
     module: tasks.hard
-    grader: hard
+    grader: graders.grader_hard
     grader_path: graders.grader_hard.HardGrader
     grader_name: hard
     grader_module: graders.grader_hard
@@ -91,6 +91,15 @@ graders:
     class: MediumGrader
     module: graders.grader_medium
   graders.grader_hard.HardGrader:
+    class: HardGrader
+    module: graders.grader_hard
+  graders.grader_easy:
+    class: EasyGrader
+    module: graders.grader_easy
+  graders.grader_medium:
+    class: MediumGrader
+    module: graders.grader_medium
+  graders.grader_hard:
     class: HardGrader
     module: graders.grader_hard
   graders.easy.EasyGrader:
