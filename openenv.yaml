@@ -20,7 +20,7 @@ tasks:
     description: Correctly classify emails into categories
     class: EasyEmailClassificationTask
     module: tasks.easy
-    grader: graders.grader_easy.EasyGrader
+    grader: easy
     grader_key: easy
     grader_id: easy
     grader_path: graders.grader_easy.EasyGrader
@@ -40,7 +40,7 @@ tasks:
     description: Classify emails, reply to support, and resolve tickets
     class: MediumSupportHandlingTask
     module: tasks.medium
-    grader: graders.grader_medium.MediumGrader
+    grader: medium
     grader_key: medium
     grader_id: medium
     grader_path: graders.grader_medium.MediumGrader
@@ -60,7 +60,7 @@ tasks:
     description: Manage emails, tickets, and meetings with prioritization
     class: HardFullOperationsTask
     module: tasks.hard
-    grader: graders.grader_hard.HardGrader
+    grader: hard
     grader_key: hard
     grader_id: hard
     grader_path: graders.grader_hard.HardGrader
@@ -81,17 +81,20 @@ task_configs:
 - name: Email Classification
   task_class: EasyEmailClassificationTask
   task_module: tasks.easy
-  grader: graders.grader_easy.EasyGrader
+  grader: easy
+  grader_path: graders.grader_easy.EasyGrader
   grader_enabled: true
 - name: Support Handling
   task_class: MediumSupportHandlingTask
   task_module: tasks.medium
-  grader: graders.grader_medium.MediumGrader
+  grader: medium
+  grader_path: graders.grader_medium.MediumGrader
   grader_enabled: true
 - name: Full Operations Management
   task_class: HardFullOperationsTask
   task_module: tasks.hard
-  grader: graders.grader_hard.HardGrader
+  grader: hard
+  grader_path: graders.grader_hard.HardGrader
   grader_enabled: true
 
 graders:

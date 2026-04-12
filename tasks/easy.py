@@ -24,7 +24,8 @@ class EasyEmailClassificationTask(BaseTask):
     Objective: Correctly classify all emails
     Rewards: +0.3 per correct, -0.3 per incorrect
     """
-    grader = "graders.grader_easy.EasyGrader"
+    grader = "easy"
+    grader_path = "graders.grader_easy.EasyGrader"
     grader_key = "easy"
     grader_name = "easy"
     grader_module = "graders.grader_easy"

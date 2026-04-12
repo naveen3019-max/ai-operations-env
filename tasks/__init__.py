@@ -17,17 +17,20 @@ TASKS = [
 TASK_REGISTRY = {
     "easy": {
         "task_class": EasyEmailClassificationTask,
-        "grader": "graders.grader_easy.EasyGrader",
+        "grader": "easy",
+        "grader_path": "graders.grader_easy.EasyGrader",
         "grader_enabled": True,
     },
     "medium": {
         "task_class": MediumSupportHandlingTask,
-        "grader": "graders.grader_medium.MediumGrader",
+        "grader": "medium",
+        "grader_path": "graders.grader_medium.MediumGrader",
         "grader_enabled": True,
     },
     "hard": {
         "task_class": HardFullOperationsTask,
-        "grader": "graders.grader_hard.HardGrader",
+        "grader": "hard",
+        "grader_path": "graders.grader_hard.HardGrader",
         "grader_enabled": True,
     },
 }
@@ -35,17 +38,46 @@ TASK_REGISTRY = {
 TASKS_WITH_GRADERS = [
     {
         "task": EasyEmailClassificationTask,
-        "grader": "graders.grader_easy.EasyGrader",
+        "grader": "easy",
+        "grader_path": "graders.grader_easy.EasyGrader",
     },
     {
         "task": MediumSupportHandlingTask,
-        "grader": "graders.grader_medium.MediumGrader",
+        "grader": "medium",
+        "grader_path": "graders.grader_medium.MediumGrader",
     },
     {
         "task": HardFullOperationsTask,
-        "grader": "graders.grader_hard.HardGrader",
+        "grader": "hard",
+        "grader_path": "graders.grader_hard.HardGrader",
     },
 ]
+
+tasks = [
+    {
+        "name": "Email Classification",
+        "task": EasyEmailClassificationTask,
+        "grader": "easy",
+        "grader_path": "graders.grader_easy.EasyGrader",
+        "grader_enabled": True,
+    },
+    {
+        "name": "Support Handling",
+        "task": MediumSupportHandlingTask,
+        "grader": "medium",
+        "grader_path": "graders.grader_medium.MediumGrader",
+        "grader_enabled": True,
+    },
+    {
+        "name": "Full Operations Management",
+        "task": HardFullOperationsTask,
+        "grader": "hard",
+        "grader_path": "graders.grader_hard.HardGrader",
+        "grader_enabled": True,
+    },
+]
+
+tasks_with_graders = tasks
 
 __all__ = [
     "BaseTask",
@@ -55,4 +87,6 @@ __all__ = [
     "TASKS",
     "TASK_REGISTRY",
     "TASKS_WITH_GRADERS",
+    "tasks",
+    "tasks_with_graders",
 ]

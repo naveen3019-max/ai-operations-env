@@ -33,7 +33,8 @@ class HardFullOperationsTask(BaseTask):
     - Resource constraints (limited steps)
     - Realistic action sequences
     """
-    grader = "graders.grader_hard.HardGrader"
+    grader = "hard"
+    grader_path = "graders.grader_hard.HardGrader"
     grader_key = "hard"
     grader_name = "hard"
     grader_module = "graders.grader_hard"

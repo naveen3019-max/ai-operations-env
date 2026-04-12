@@ -25,7 +25,8 @@ class MediumSupportHandlingTask(BaseTask):
     Objective: Classify emails, reply appropriately, resolve tickets
     Challenges: Dependencies, prioritization, appropriate responses
     """
-    grader = "graders.grader_medium.MediumGrader"
+    grader = "medium"
+    grader_path = "graders.grader_medium.MediumGrader"
     grader_key = "medium"
     grader_name = "medium"
     grader_module = "graders.grader_medium"

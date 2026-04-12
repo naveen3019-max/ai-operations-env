@@ -44,10 +44,10 @@ class BaseTask(ABC):
             if grader_module and grader_class
             else ""
         )
-        if self.grader_path:
-            self.grader = self.grader_path
-        elif grader_name:
+        if grader_name:
             self.grader = grader_name
+        elif self.grader_path:
+            self.grader = self.grader_path
         elif grader_module:
             self.grader = grader_module
         else:
