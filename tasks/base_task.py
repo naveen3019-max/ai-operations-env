@@ -44,12 +44,14 @@ class BaseTask(ABC):
             if grader_module and grader_class
             else ""
         )
-        if grader_name:
+        if self.grader_path:
+            self.grader = self.grader_path
+        elif grader_name:
             self.grader = grader_name
         elif grader_module:
             self.grader = grader_module
         else:
-            self.grader = self.grader_path
+            self.grader = ""
         self.env: AIOperationsEnvironment = None
         self.episode_data: Dict[str, Any] = {}
 
