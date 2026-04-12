@@ -43,6 +43,9 @@ class MediumSupportHandlingTask(BaseTask):
 
     def _populate_environment(self) -> None:
         """Populate with emails and tickets."""
+        self.expected_classifications.clear()
+        self.support_email_ids.clear()
+
         # Add emails
         num_emails = 6
         self.env.populate_with_emails(count=num_emails)

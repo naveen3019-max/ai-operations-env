@@ -4,6 +4,7 @@ Base task class for AI Operations Assistant Environment tasks.
 
 from abc import ABC, abstractmethod
 from importlib import import_module
+import random
 from typing import Dict, Any, Optional
 from env.environment import AIOperationsEnvironment
 from env.models import Observation, Reward, TaskResult
@@ -89,5 +90,6 @@ class BaseTask(ABC):
         else:
             # Reset and repopulate
             self.env.reset()
+            random.seed(self.env.seed_value)
             self._populate_environment()
         return self.env._get_observation()

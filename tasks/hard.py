@@ -52,6 +52,9 @@ class HardFullOperationsTask(BaseTask):
 
     def _populate_environment(self) -> None:
         """Populate with emails, tickets, and meetings."""
+        self.expected_classifications.clear()
+        self.urgent_items.clear()
+
         # Add emails (mix of urgent and routine)
         num_emails = 9
         self.env.populate_with_emails(count=num_emails)

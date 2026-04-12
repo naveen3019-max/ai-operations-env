@@ -40,6 +40,8 @@ class EasyEmailClassificationTask(BaseTask):
 
     def _populate_environment(self) -> None:
         """Populate with emails only."""
+        self.expected_classifications.clear()
+
         # Generate 6-8 emails
         num_emails = 7
         self.env.populate_with_emails(count=num_emails)

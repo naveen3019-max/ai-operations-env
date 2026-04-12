@@ -34,7 +34,7 @@ class EasyGrader(BaseGrader):
         total = 0
 
         for email in state.emails:
-            if email.category is not None:
+            if email.handled and email.category is not None:
                 total += 1
                 if email.category == email.ground_truth_category:
                     correct += 1
