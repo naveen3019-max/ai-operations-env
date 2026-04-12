@@ -24,6 +24,7 @@ tasks:
     grader_key: easy
     grader_id: easy
     grader_path: graders.grader_easy.EasyGrader
+    grader_import_path: graders.easy.EasyGrader
     grader_name: easy
     grader_module: graders.grader_easy
     grader_class: EasyGrader
@@ -44,6 +45,7 @@ tasks:
     grader_key: medium
     grader_id: medium
     grader_path: graders.grader_medium.MediumGrader
+    grader_import_path: graders.medium.MediumGrader
     grader_name: medium
     grader_module: graders.grader_medium
     grader_class: MediumGrader
@@ -64,6 +66,7 @@ tasks:
     grader_key: hard
     grader_id: hard
     grader_path: graders.grader_hard.HardGrader
+    grader_import_path: graders.hard.HardGrader
     grader_name: hard
     grader_module: graders.grader_hard
     grader_class: HardGrader
@@ -76,6 +79,7 @@ tasks:
 
 tasks_with_graders: 3
 tasks_with_graders_min: 3
+tasks_with_graders_count: 3
 
 task_configs:
 - name: Email Classification
@@ -83,19 +87,45 @@ task_configs:
   task_module: tasks.easy
   grader: easy
   grader_path: graders.grader_easy.EasyGrader
+  grader_import_path: graders.easy.EasyGrader
   grader_enabled: true
 - name: Support Handling
   task_class: MediumSupportHandlingTask
   task_module: tasks.medium
   grader: medium
   grader_path: graders.grader_medium.MediumGrader
+  grader_import_path: graders.medium.MediumGrader
   grader_enabled: true
 - name: Full Operations Management
   task_class: HardFullOperationsTask
   task_module: tasks.hard
   grader: hard
   grader_path: graders.grader_hard.HardGrader
+  grader_import_path: graders.hard.HardGrader
   grader_enabled: true
+
+grader_configs:
+  - key: easy
+    class: EasyGrader
+    module: graders.grader_easy
+    path: graders.grader_easy.EasyGrader
+    import_path: graders.grader_easy.EasyGrader
+    alias_path: graders.easy.EasyGrader
+    enabled: true
+  - key: medium
+    class: MediumGrader
+    module: graders.grader_medium
+    path: graders.grader_medium.MediumGrader
+    import_path: graders.grader_medium.MediumGrader
+    alias_path: graders.medium.MediumGrader
+    enabled: true
+  - key: hard
+    class: HardGrader
+    module: graders.grader_hard
+    path: graders.grader_hard.HardGrader
+    import_path: graders.grader_hard.HardGrader
+    alias_path: graders.hard.HardGrader
+    enabled: true
 
 graders:
   easy:
@@ -103,16 +133,19 @@ graders:
     module: graders.grader_easy
     path: graders.grader_easy.EasyGrader
     import_path: graders.grader_easy.EasyGrader
+    alias_path: graders.easy.EasyGrader
   medium:
     class: MediumGrader
     module: graders.grader_medium
     path: graders.grader_medium.MediumGrader
     import_path: graders.grader_medium.MediumGrader
+    alias_path: graders.medium.MediumGrader
   hard:
     class: HardGrader
     module: graders.grader_hard
     path: graders.grader_hard.HardGrader
     import_path: graders.grader_hard.HardGrader
+    alias_path: graders.hard.HardGrader
 
   graders.grader_easy.EasyGrader:
     class: EasyGrader
@@ -125,6 +158,19 @@ graders:
   graders.grader_hard.HardGrader:
     class: HardGrader
     module: graders.grader_hard
+    alias_of: hard
+
+  graders.easy.EasyGrader:
+    class: EasyGrader
+    module: graders.easy
+    alias_of: easy
+  graders.medium.MediumGrader:
+    class: MediumGrader
+    module: graders.medium
+    alias_of: medium
+  graders.hard.HardGrader:
+    class: HardGrader
+    module: graders.hard
     alias_of: hard
 
 baseline:

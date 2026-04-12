@@ -18,6 +18,30 @@ from tasks.hard import HardFullOperationsTask
 from baseline.agent import BaselineAgent
 
 
+EPSILON = 1e-6
+
+
+def strict_open(value: float, epsilon: float = EPSILON) -> float:
+    """Clamp numeric values to the strict open interval (0, 1)."""
+    return max(epsilon, min(1.0 - epsilon, float(value)))
+
+
+def sanitize_metrics(value, key_name: str = ""):
+    """Recursively clamp score-like diagnostic fields to strict-open bounds."""
+    if isinstance(value, dict):
+        return {k: sanitize_metrics(v, k) for k, v in value.items()}
+
+    if isinstance(value, list):
+        return [sanitize_metrics(v, key_name) for v in value]
+
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        metric_key = key_name.lower()
+        if any(token in metric_key for token in ("score", "rate", "accuracy", "coverage")):
+            return strict_open(value)
+
+    return value
+
+
 def run_baseline_on_task(task, num_episodes: int = 3, verbose: bool = True) -> dict:
     """
     Run baseline agent on a task multiple times.
@@ -53,10 +77,10 @@ def run_baseline_on_task(task, num_episodes: int = 3, verbose: bool = True) -> d
                 "episode": episode,
                 "total_reward": total_reward,
                 "steps": env._state.step,
-                "final_score": task_result.final_score,
+                "final_score": strict_open(task_result.final_score),
                 "success": task_result.success,
                 "action_counts": task_result.action_counts,
-                "details": task_result.details,
+                "details": sanitize_metrics(task_result.details),
             }
         )
 
@@ -69,9 +93,14 @@ def run_baseline_on_task(task, num_episodes: int = 3, verbose: bool = True) -> d
     # Aggregate results
     scores = [r["final_score"] for r in episode_results]
     rewards = [r["total_reward"] for r in episode_results]
-    avg_score = sum(scores) / len(scores)
+    avg_score = strict_open(sum(scores) / len(scores))
     avg_reward = sum(rewards) / len(rewards)
-    success_rate = sum(1 for r in episode_results if r["success"]) / len(episode_results)
+    success_rate = strict_open(sum(1 for r in episode_results if r["success"]) / len(episode_results))
+    score_std = strict_open(
+        (
+            sum((s - avg_score) ** 2 for s in scores) / len(scores)
+        ) ** 0.5
+    )
 
     if verbose:
         print(f"\n  Average Score: {avg_score:.3f}")
@@ -85,9 +114,7 @@ def run_baseline_on_task(task, num_episodes: int = 3, verbose: bool = True) -> d
         "average_score": avg_score,
         "average_reward": avg_reward,
         "success_rate": success_rate,
-        "score_std": (
-            sum((s - avg_score) ** 2 for s in scores) / len(scores)
-        ) ** 0.5,
+        "score_std": score_std,
         "episodes": episode_results,
     }
 
@@ -140,7 +167,7 @@ def main():
                 "average_reward": data["average_reward"],
                 "success_rate": data["success_rate"],
                 "score_std": data["score_std"],
-                "episodes": data["episodes"],
+                "episodes": sanitize_metrics(data["episodes"]),
             }
         json.dump(json_results, f, indent=2)
 

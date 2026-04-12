@@ -12,6 +12,7 @@ from typing import Callable, Iterable
 from baseline.agent import BaselineAgent
 from env.environment import AIOperationsEnvironment
 from env.models import ClassifyEmailAction, EmailCategory
+from tasks import TASKS_WITH_GRADERS
 from tasks.easy import EasyEmailClassificationTask
 from tasks.medium import MediumSupportHandlingTask
 from tasks.hard import HardFullOperationsTask
@@ -54,15 +55,26 @@ def _validate_task(task_factory: Callable[[], object], expected_name: str) -> No
     agent = BaselineAgent(seed=42)
     total_reward, _ = agent.run_episode(env, max_steps=task.max_steps, verbose=False, reset_env=False)
     result = task.evaluate(env)
+    grader = task.create_grader()
+    grader_result = grader.grade(env, total_reward=total_reward)
 
     _assert(result.task_name == expected_name, f"unexpected task name: {result.task_name}")
-    _assert(0.0 <= result.final_score <= 1.0, f"score out of range for {expected_name}")
+    _assert(0.0 < result.final_score < 1.0, f"score out of strict-open range for {expected_name}")
+    _assert(0.0 < grader_result.final_score < 1.0, f"grader score out of strict-open range for {expected_name}")
     _assert(isinstance(total_reward, float), f"baseline failed for {expected_name}")
+
+
+def _validate_task_grader_registry() -> None:
+    _assert(len(TASKS_WITH_GRADERS) >= 3, "not enough tasks with graders")
+    for index, entry in enumerate(TASKS_WITH_GRADERS):
+        _assert(entry.get("grader"), f"missing grader key for registry entry {index}")
+        _assert(entry.get("grader_path") or entry.get("grader_import_path"), f"missing grader path for registry entry {index}")
 
 
 def main() -> None:
     checks: Iterable[tuple[str, Callable[[], None]]] = (
         ("environment", _validate_environment),
+        ("task grader registry", _validate_task_grader_registry),
         ("easy task", lambda: _validate_task(EasyEmailClassificationTask, "Email Classification")),
         ("medium task", lambda: _validate_task(MediumSupportHandlingTask, "Support Handling")),
         ("hard task", lambda: _validate_task(HardFullOperationsTask, "Full Operations Management")),

@@ -19,18 +19,21 @@ TASK_REGISTRY = {
         "task_class": EasyEmailClassificationTask,
         "grader": "easy",
         "grader_path": "graders.grader_easy.EasyGrader",
+        "grader_import_path": "graders.easy.EasyGrader",
         "grader_enabled": True,
     },
     "medium": {
         "task_class": MediumSupportHandlingTask,
         "grader": "medium",
         "grader_path": "graders.grader_medium.MediumGrader",
+        "grader_import_path": "graders.medium.MediumGrader",
         "grader_enabled": True,
     },
     "hard": {
         "task_class": HardFullOperationsTask,
         "grader": "hard",
         "grader_path": "graders.grader_hard.HardGrader",
+        "grader_import_path": "graders.hard.HardGrader",
         "grader_enabled": True,
     },
 }
@@ -40,18 +43,23 @@ TASKS_WITH_GRADERS = [
         "task": EasyEmailClassificationTask,
         "grader": "easy",
         "grader_path": "graders.grader_easy.EasyGrader",
+        "grader_import_path": "graders.easy.EasyGrader",
     },
     {
         "task": MediumSupportHandlingTask,
         "grader": "medium",
         "grader_path": "graders.grader_medium.MediumGrader",
+        "grader_import_path": "graders.medium.MediumGrader",
     },
     {
         "task": HardFullOperationsTask,
         "grader": "hard",
         "grader_path": "graders.grader_hard.HardGrader",
+        "grader_import_path": "graders.hard.HardGrader",
     },
 ]
+
+TASKS_WITH_GRADERS_COUNT = len(TASKS_WITH_GRADERS)
 
 tasks = [
     {
@@ -59,6 +67,7 @@ tasks = [
         "task": EasyEmailClassificationTask,
         "grader": "easy",
         "grader_path": "graders.grader_easy.EasyGrader",
+        "grader_import_path": "graders.easy.EasyGrader",
         "grader_enabled": True,
     },
     {
@@ -66,6 +75,7 @@ tasks = [
         "task": MediumSupportHandlingTask,
         "grader": "medium",
         "grader_path": "graders.grader_medium.MediumGrader",
+        "grader_import_path": "graders.medium.MediumGrader",
         "grader_enabled": True,
     },
     {
@@ -73,11 +83,13 @@ tasks = [
         "task": HardFullOperationsTask,
         "grader": "hard",
         "grader_path": "graders.grader_hard.HardGrader",
+        "grader_import_path": "graders.hard.HardGrader",
         "grader_enabled": True,
     },
 ]
 
 tasks_with_graders = tasks
+tasks_with_graders_count = len(tasks_with_graders)
 
 __all__ = [
     "BaseTask",
@@ -87,6 +99,8 @@ __all__ = [
     "TASKS",
     "TASK_REGISTRY",
     "TASKS_WITH_GRADERS",
+    "TASKS_WITH_GRADERS_COUNT",
     "tasks",
     "tasks_with_graders",
+    "tasks_with_graders_count",
 ]

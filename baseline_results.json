@@ -4,8 +4,8 @@
     "difficulty": "easy",
     "average_score": 0.42857142857142855,
     "average_reward": -0.6499999999999999,
-    "success_rate": 0.0,
-    "score_std": 0.0,
+    "success_rate": 1e-06,
+    "score_std": 1e-06,
     "episodes": [
       {
         "episode": 0,
@@ -21,7 +21,7 @@
           "correct": 3,
           "total": 7,
           "accuracy": 0.42857142857142855,
-          "coverage": 1.0
+          "coverage": 0.999999
         }
       },
       {
@@ -38,7 +38,7 @@
           "correct": 3,
           "total": 7,
           "accuracy": 0.42857142857142855,
-          "coverage": 1.0
+          "coverage": 0.999999
         }
       },
       {
@@ -55,7 +55,7 @@
           "correct": 3,
           "total": 7,
           "accuracy": 0.42857142857142855,
-          "coverage": 1.0
+          "coverage": 0.999999
         }
       }
     ]
@@ -65,8 +65,8 @@
     "difficulty": "medium",
     "average_score": 0.20000000000000004,
     "average_reward": -0.29999999999999993,
-    "success_rate": 0.0,
-    "score_std": 2.7755575615628914e-17,
+    "success_rate": 1e-06,
+    "score_std": 1e-06,
     "episodes": [
       {
         "episode": 0,
@@ -79,8 +79,8 @@
         },
         "details": {
           "classification_accuracy": 0.5,
-          "support_reply_coverage": 0.0,
-          "ticket_resolution_rate": 0.0,
+          "support_reply_coverage": 1e-06,
+          "ticket_resolution_rate": 1e-06,
           "emails_classified": 6,
           "correct_classifications": 3,
           "support_emails_replied": 0,
@@ -99,8 +99,8 @@
         },
         "details": {
           "classification_accuracy": 0.5,
-          "support_reply_coverage": 0.0,
-          "ticket_resolution_rate": 0.0,
+          "support_reply_coverage": 1e-06,
+          "ticket_resolution_rate": 1e-06,
           "emails_classified": 6,
           "correct_classifications": 3,
           "support_emails_replied": 0,
@@ -119,8 +119,8 @@
         },
         "details": {
           "classification_accuracy": 0.5,
-          "support_reply_coverage": 0.0,
-          "ticket_resolution_rate": 0.0,
+          "support_reply_coverage": 1e-06,
+          "ticket_resolution_rate": 1e-06,
           "emails_classified": 6,
           "correct_classifications": 3,
           "support_emails_replied": 0,
@@ -134,13 +134,13 @@
     "task_name": "Full Operations Management",
     "difficulty": "hard",
     "average_score": 0.5833388888888889,
-    "average_reward": 0.6900000000000001,
-    "success_rate": 0.0,
-    "score_std": 0.0,
+    "average_reward": 0.2900000000000001,
+    "success_rate": 1e-06,
+    "score_std": 1e-06,
     "episodes": [
       {
         "episode": 0,
-        "total_reward": 0.6900000000000002,
+        "total_reward": 0.2900000000000001,
         "steps": 13,
         "final_score": 0.5833388888888889,
         "success": false,
@@ -167,7 +167,7 @@
       },
       {
         "episode": 1,
-        "total_reward": 0.6900000000000002,
+        "total_reward": 0.2900000000000001,
         "steps": 13,
         "final_score": 0.5833388888888889,
         "success": false,
@@ -194,7 +194,7 @@
       },
       {
         "episode": 2,
-        "total_reward": 0.6900000000000002,
+        "total_reward": 0.2900000000000001,
         "steps": 13,
         "final_score": 0.5833388888888889,
         "success": false,
