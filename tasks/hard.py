@@ -33,6 +33,12 @@ class HardFullOperationsTask(BaseTask):
     - Resource constraints (limited steps)
     - Realistic action sequences
     """
+    grader = "graders.grader_hard.HardGrader"
+    grader_key = "hard"
+    grader_name = "hard"
+    grader_module = "graders.grader_hard"
+    grader_class = "HardGrader"
+    grader_enabled = True
 
     def __init__(self, max_steps: int = 120):
         """Initialize hard task."""

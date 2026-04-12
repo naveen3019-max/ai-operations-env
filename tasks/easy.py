@@ -24,6 +24,12 @@ class EasyEmailClassificationTask(BaseTask):
     Objective: Correctly classify all emails
     Rewards: +0.3 per correct, -0.3 per incorrect
     """
+    grader = "graders.grader_easy.EasyGrader"
+    grader_key = "easy"
+    grader_name = "easy"
+    grader_module = "graders.grader_easy"
+    grader_class = "EasyGrader"
+    grader_enabled = True
 
     def __init__(self, max_steps: int = 50):
         """Initialize easy task."""

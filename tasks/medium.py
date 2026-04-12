@@ -25,6 +25,12 @@ class MediumSupportHandlingTask(BaseTask):
     Objective: Classify emails, reply appropriately, resolve tickets
     Challenges: Dependencies, prioritization, appropriate responses
     """
+    grader = "graders.grader_medium.MediumGrader"
+    grader_key = "medium"
+    grader_name = "medium"
+    grader_module = "graders.grader_medium"
+    grader_class = "MediumGrader"
+    grader_enabled = True
 
     def __init__(self, max_steps: int = 75):
         """Initialize medium task."""

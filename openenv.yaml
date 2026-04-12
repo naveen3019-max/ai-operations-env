@@ -15,11 +15,14 @@ environment:
 
 tasks:
   - name: Email Classification
+    id: task_easy_email_classification
     difficulty: easy
     description: Correctly classify emails into categories
     class: EasyEmailClassificationTask
     module: tasks.easy
-    grader: easy
+    grader: graders.grader_easy.EasyGrader
+    grader_key: easy
+    grader_id: easy
     grader_path: graders.grader_easy.EasyGrader
     grader_name: easy
     grader_module: graders.grader_easy
@@ -32,11 +35,14 @@ tasks:
       meetings: 0
 
   - name: Support Handling
+    id: task_medium_support_handling
     difficulty: medium
     description: Classify emails, reply to support, and resolve tickets
     class: MediumSupportHandlingTask
     module: tasks.medium
-    grader: medium
+    grader: graders.grader_medium.MediumGrader
+    grader_key: medium
+    grader_id: medium
     grader_path: graders.grader_medium.MediumGrader
     grader_name: medium
     grader_module: graders.grader_medium
@@ -49,11 +55,14 @@ tasks:
       meetings: 0
 
   - name: Full Operations Management
+    id: task_hard_full_operations
     difficulty: hard
     description: Manage emails, tickets, and meetings with prioritization
     class: HardFullOperationsTask
     module: tasks.hard
-    grader: hard
+    grader: graders.grader_hard.HardGrader
+    grader_key: hard
+    grader_id: hard
     grader_path: graders.grader_hard.HardGrader
     grader_name: hard
     grader_module: graders.grader_hard
@@ -69,12 +78,31 @@ graders:
   easy:
     class: EasyGrader
     module: graders.grader_easy
+    path: graders.grader_easy.EasyGrader
+    import_path: graders.grader_easy.EasyGrader
   medium:
     class: MediumGrader
     module: graders.grader_medium
+    path: graders.grader_medium.MediumGrader
+    import_path: graders.grader_medium.MediumGrader
   hard:
     class: HardGrader
     module: graders.grader_hard
+    path: graders.grader_hard.HardGrader
+    import_path: graders.grader_hard.HardGrader
+
+  graders.grader_easy.EasyGrader:
+    class: EasyGrader
+    module: graders.grader_easy
+    alias_of: easy
+  graders.grader_medium.MediumGrader:
+    class: MediumGrader
+    module: graders.grader_medium
+    alias_of: medium
+  graders.grader_hard.HardGrader:
+    class: HardGrader
+    module: graders.grader_hard
+    alias_of: hard
 
 baseline:
   agent_class: BaselineAgent
