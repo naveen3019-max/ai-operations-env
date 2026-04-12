@@ -44,10 +44,10 @@ class BaseTask(ABC):
             if grader_module and grader_class
             else ""
         )
-        if grader_module:
-            self.grader = grader_module
-        elif grader_name:
+        if grader_name:
             self.grader = grader_name
+        elif grader_module:
+            self.grader = grader_module
         else:
             self.grader = self.grader_path
         self.env: AIOperationsEnvironment = None
