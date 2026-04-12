@@ -19,10 +19,10 @@ tasks:
     description: Correctly classify emails into categories
     class: EasyEmailClassificationTask
     module: tasks.easy
-    grader:
-      class: EasyGrader
-      module: graders.grader_easy
-      enabled: true
+    grader: graders.grader_easy.EasyGrader
+    grader_module: graders.grader_easy
+    grader_class: EasyGrader
+    grader_enabled: true
     max_steps: 50
     initial_items:
       emails: 7
@@ -34,10 +34,10 @@ tasks:
     description: Classify emails, reply to support, and resolve tickets
     class: MediumSupportHandlingTask
     module: tasks.medium
-    grader:
-      class: MediumGrader
-      module: graders.grader_medium
-      enabled: true
+    grader: graders.grader_medium.MediumGrader
+    grader_module: graders.grader_medium
+    grader_class: MediumGrader
+    grader_enabled: true
     max_steps: 75
     initial_items:
       emails: 6
@@ -49,10 +49,10 @@ tasks:
     description: Manage emails, tickets, and meetings with prioritization
     class: HardFullOperationsTask
     module: tasks.hard
-    grader:
-      class: HardGrader
-      module: graders.grader_hard
-      enabled: true
+    grader: graders.grader_hard.HardGrader
+    grader_module: graders.grader_hard
+    grader_class: HardGrader
+    grader_enabled: true
     max_steps: 120
     initial_items:
       emails: 9
