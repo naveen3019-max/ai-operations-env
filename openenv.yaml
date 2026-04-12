@@ -74,6 +74,26 @@ tasks:
       tickets: 3
       meetings: 2
 
+tasks_with_graders: 3
+tasks_with_graders_min: 3
+
+task_configs:
+- name: Email Classification
+  task_class: EasyEmailClassificationTask
+  task_module: tasks.easy
+  grader: graders.grader_easy.EasyGrader
+  grader_enabled: true
+- name: Support Handling
+  task_class: MediumSupportHandlingTask
+  task_module: tasks.medium
+  grader: graders.grader_medium.MediumGrader
+  grader_enabled: true
+- name: Full Operations Management
+  task_class: HardFullOperationsTask
+  task_module: tasks.hard
+  grader: graders.grader_hard.HardGrader
+  grader_enabled: true
+
 graders:
   easy:
     class: EasyGrader
