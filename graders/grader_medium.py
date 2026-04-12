@@ -28,13 +28,15 @@ class MediumGrader(BaseGrader):
         Returns:
             TaskResult with deterministic score 0.0-1.0
         """
+        state = env.state_obj
+
         # ====================================================================
         # 1. Classification Accuracy
         # ====================================================================
         correct_classifications = 0
         total_classified = 0
 
-        for email in env.state.emails:
+        for email in state.emails:
             if email.handled and email.category is not None:
                 total_classified += 1
                 if email.category == email.ground_truth_category:
@@ -49,7 +51,7 @@ class MediumGrader(BaseGrader):
         # ====================================================================
         support_emails = [
             e
-            for e in env.state.emails
+            for e in state.emails
             if e.category
             in [EmailCategory.TECHNICAL_SUPPORT, EmailCategory.BILLING]
         ]
@@ -61,10 +63,10 @@ class MediumGrader(BaseGrader):
         # ====================================================================
         closed_tickets = sum(
             1
-            for t in env.state.tickets
+            for t in state.tickets
             if t.status == TicketStatus.CLOSED
         )
-        total_tickets = len(env.state.tickets)
+        total_tickets = len(state.tickets)
         resolution_score = (
             closed_tickets / total_tickets if total_tickets > 0 else 1.0
         )

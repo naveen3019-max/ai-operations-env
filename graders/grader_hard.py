@@ -31,13 +31,15 @@ class HardGrader(BaseGrader):
         Returns:
             TaskResult with deterministic score 0.0-1.0
         """
+        state = env.state_obj
+
         # ====================================================================
         # 1. Email Classification Accuracy (25%)
         # ====================================================================
         correct_classifications = 0
         total_classified = 0
 
-        for email in env.state.emails:
+        for email in state.emails:
             if email.handled and email.category is not None:
                 total_classified += 1
                 if email.category == email.ground_truth_category:
@@ -52,7 +54,7 @@ class HardGrader(BaseGrader):
         # ====================================================================
         support_emails = [
             e
-            for e in env.state.emails
+            for e in state.emails
             if e.category
             in [EmailCategory.TECHNICAL_SUPPORT, EmailCategory.BILLING]
         ]
@@ -65,7 +67,7 @@ class HardGrader(BaseGrader):
         # 3. Critical Ticket Handling (20%)
         # ====================================================================
         critical_tickets = [
-            t for t in env.state.tickets if t.severity == TicketSeverity.CRITICAL
+            t for t in state.tickets if t.severity == TicketSeverity.CRITICAL
         ]
         critical_handled = sum(
             1
@@ -81,7 +83,7 @@ class HardGrader(BaseGrader):
         # 4. Low Ticket Closure (10%)
         # ====================================================================
         low_tickets = [
-            t for t in env.state.tickets if t.severity == TicketSeverity.LOW
+            t for t in state.tickets if t.severity == TicketSeverity.LOW
         ]
         low_closed = sum(1 for t in low_tickets if t.status == TicketStatus.CLOSED)
         low_score = (
@@ -93,13 +95,13 @@ class HardGrader(BaseGrader):
         # ====================================================================
         scheduled_meetings = sum(
             1
-            for m in env.state.meetings
+            for m in state.meetings
             if m.status == MeetingStatus.SCHEDULED
         )
         meeting_score = (
             (
-                scheduled_meetings / len(env.state.meetings)
-                if env.state.meetings
+                scheduled_meetings / len(state.meetings)
+                if state.meetings
                 else 1.0
             )
             * 0.15
@@ -109,7 +111,7 @@ class HardGrader(BaseGrader):
         # 6. Efficiency Bonus (10%)
         # ====================================================================
         # Bonus for using fewer steps (max 120)
-        steps_ratio = min(1.0, env.state.step / 120.0)
+        steps_ratio = min(1.0, state.step / 120.0)
         efficiency_bonus = (1.0 - steps_ratio * 0.3) * 0.10  # Up to 10% if very efficient
 
         # ====================================================================
@@ -138,10 +140,10 @@ class HardGrader(BaseGrader):
                 "reply_rate": replied_count / len(support_emails) if support_emails else 1.0,
                 "critical_handling_rate": critical_handled / len(critical_tickets) if critical_tickets else 1.0,
                 "low_closure_rate": low_closed / len(low_tickets) if low_tickets else 1.0,
-                "meeting_scheduling_rate": scheduled_meetings / len(env.state.meetings) if env.state.meetings else 1.0,
+                "meeting_scheduling_rate": scheduled_meetings / len(state.meetings) if state.meetings else 1.0,
                 "efficiency_score": efficiency_bonus,
-                "total_emails": len(env.state.emails),
-                "total_tickets": len(env.state.tickets),
-                "total_meetings": len(env.state.meetings),
+                "total_emails": len(state.emails),
+                "total_tickets": len(state.tickets),
+                "total_meetings": len(state.meetings),
             },
         )

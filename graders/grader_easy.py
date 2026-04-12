@@ -27,11 +27,13 @@ class EasyGrader(BaseGrader):
         Returns:
             TaskResult with deterministic score
         """
+        state = env.state_obj
+
         # Ground truth is stored separately from the agent-assigned category.
         correct = 0
         total = 0
 
-        for email in env.state.emails:
+        for email in state.emails:
             if email.category is not None:
                 total += 1
                 if email.category == email.ground_truth_category:
@@ -52,6 +54,6 @@ class EasyGrader(BaseGrader):
             details={
                 "accuracy": accuracy,
                 "classified": total,
-                "total_possible": len(env.state.emails),
+                "total_possible": len(state.emails),
             },
         )

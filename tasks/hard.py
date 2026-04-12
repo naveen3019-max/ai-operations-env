@@ -41,6 +41,8 @@ class HardFullOperationsTask(BaseTask):
             description="Manage emails, tickets, and meetings with prioritization and efficiency",
             difficulty="hard",
             max_steps=max_steps,
+            grader_module="graders.grader_hard",
+            grader_class="HardGrader",
         )
         self.expected_classifications: Dict[str, EmailCategory] = {}
         self.total_emails: int = 0

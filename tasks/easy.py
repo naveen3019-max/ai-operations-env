@@ -32,6 +32,8 @@ class EasyEmailClassificationTask(BaseTask):
             description="Classify emails into categories (Product, Billing, Feedback, Support, Spam)",
             difficulty="easy",
             max_steps=max_steps,
+            grader_module="graders.grader_easy",
+            grader_class="EasyGrader",
         )
         self.expected_classifications: Dict[str, EmailCategory] = {}
         self.total_emails: int = 0

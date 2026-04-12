@@ -3,7 +3,8 @@ Base task class for AI Operations Assistant Environment tasks.
 """
 
 from abc import ABC, abstractmethod
-from typing import Dict, Any
+from importlib import import_module
+from typing import Dict, Any, Optional
 from env.environment import AIOperationsEnvironment
 from env.models import Observation, Reward, TaskResult
 
@@ -11,7 +12,15 @@ from env.models import Observation, Reward, TaskResult
 class BaseTask(ABC):
     """Abstract base class for tasks."""
 
-    def __init__(self, name: str, description: str, difficulty: str, max_steps: int = 100):
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        difficulty: str,
+        max_steps: int = 100,
+        grader_module: str = "",
+        grader_class: str = "",
+    ):
         """
         Initialize task.
         
@@ -25,8 +34,24 @@ class BaseTask(ABC):
         self.description = description
         self.difficulty = difficulty
         self.max_steps = max_steps
+        self.grader_module = grader_module
+        self.grader_class = grader_class
+        self.grader = (
+            f"{grader_module}.{grader_class}"
+            if grader_module and grader_class
+            else ""
+        )
         self.env: AIOperationsEnvironment = None
         self.episode_data: Dict[str, Any] = {}
+
+    def create_grader(self) -> Optional[Any]:
+        """Instantiate the configured grader, if one is declared."""
+        if not self.grader_module or not self.grader_class:
+            return None
+
+        module = import_module(self.grader_module)
+        grader_cls = getattr(module, self.grader_class)
+        return grader_cls()
 
     def setup_environment(self) -> AIOperationsEnvironment:
         """
